@@ -91,4 +91,4 @@ The service worker registers in production builds. See [PWA behavior and verific
 
 `npm run build` emits `client/dist` and `dist/server`. Production uses `npm start` to serve both the UI and API from one origin. The supplied Dockerfile and Compose app profile support a PostgreSQL-backed deployment behind HTTPS. Publication/deployment and real bank details remain operator configuration.
 
-The pre-existing root `dist` contains the old template build. The current production build is `client/dist`; it is generated from the Quizio sources above.
+Build outputs are generated locally and excluded from Git: `client/dist` for the frontend and `dist/server` for the API. Recreate both with `npm run build`. The repository retains the original template in `src`, the application code, its current Vite/Tailwind configuration, tests and deployment documentation.
