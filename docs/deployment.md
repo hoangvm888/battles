@@ -178,6 +178,15 @@ The shell expands these variables locally; do not paste the connection-string va
 
 ## Troubleshooting
 
+If Vite reports that `tailwindcss` cannot be used directly as a PostCSS plugin, the local installation has Tailwind 4 while the Quizio template requires Tailwind 3. Stop the development server with Ctrl+C, then repair the version from the repository root:
+
+```bash
+npm install -D --save-exact tailwindcss@3.4.17
+npm run dev
+```
+
+The repository pins Tailwind `3.4.17`. Use `npm ci` for clean installs from the committed lockfile. The template uses the Tailwind 3 PostCSS API and Sass directives; the Tailwind 4 `@tailwindcss/postcss` package is not needed.
+
 | Symptom | Check |
 | --- | --- |
 | API cannot start | Database URL, PostgreSQL readiness, applied migrations, process port |

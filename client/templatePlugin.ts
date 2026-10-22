@@ -8,6 +8,7 @@ export function quizioTemplate(root: string): Plugin {
   const images = path.join(root, 'src/assets/images');
   const manifest = path.join(root, 'src/manifest.json');
   const worker = path.join(root, 'src/assets/js/service-worker.js');
+  let isBuild = false;
   function files(directory: string): string[] {
     return readdirSync(directory).flatMap((name) => {
       const file = path.join(directory, name);
@@ -22,6 +23,9 @@ export function quizioTemplate(root: string): Plugin {
   return {
     name: 'original-quizio-template',
     enforce: 'post',
+    configResolved(config) {
+      isBuild = config.command === 'build';
+    },
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         let pathname: string;
@@ -76,6 +80,7 @@ export function quizioTemplate(root: string): Plugin {
       });
     },
     buildStart() {
+      if (!isBuild) return;
       for (const file of files(images)) {
         this.addWatchFile(file);
         this.emitFile({
