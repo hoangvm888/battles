@@ -1,4 +1,6 @@
 import { test, expect, type APIRequestContext } from '@playwright/test';
+import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 
 const stamp = `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 const email = `browser-${stamp}@example.test`;
@@ -6,9 +8,14 @@ const playerName = `Browser Player ${stamp}`;
 const password = 'BrowserPlayer123!';
 const title = `Browser verification ${stamp}`;
 
-async function json(response: Awaited<ReturnType<APIRequestContext['get']>>) {
+async function json(
+  response: Awaited<ReturnType<APIRequestContext['get']>>,
+): Promise<Record<string, any>> {
   expect(response.ok(), `API returned ${response.status()}`).toBeTruthy();
-  return response.json();
+  const data: unknown = await response.json();
+  expect(data).not.toBeNull();
+  expect(typeof data).toBe('object');
+  return data as Record<string, any>;
 }
 
 test('mobile registration → deposit approval → immutable bet → result and rankings', async ({
@@ -93,7 +100,7 @@ test('mobile registration → deposit approval → immutable bet → result and 
     expect(initialBalance).toBeGreaterThanOrEqual(100);
 
     await page.goto('/wallet');
-    await page.getByRole('button', { name: /Browser package/ }).click();
+    await page.getByRole('button', { name: new RegExp(`Browser package ${stamp}`) }).click();
     await page
       .getByPlaceholder('Reference from your completed bank transfer')
       .fill(`BROWSER-${stamp}`);
@@ -188,6 +195,62 @@ test('public pages render at desktop and mobile widths without horizontal overfl
   }
 });
 
+test('Quizio legacy routes reuse the original artwork and mobile application frame', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/home.html');
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.getByRole('heading', { name: 'Quizio', exact: true })).toBeVisible();
+  await expect(page.locator('img.quizio-header-art')).toHaveAttribute(
+    'src',
+    '/assets/images/header-bg-1.png',
+  );
+  expect(
+    await page
+      .locator('.quizio-frame')
+      .evaluate((element) => element.getBoundingClientRect().width),
+  ).toBeLessThanOrEqual(430);
+  expect(
+    await page.locator('body').evaluate((element) => getComputedStyle(element).fontFamily),
+  ).toContain('Poppins');
+  for (const name of ['header-bg-1.png', 'header-bg-2.png', 'quizio-logo.png']) {
+    const response = await page.request.get(`/assets/images/${name}`);
+    expect(response.ok()).toBeTruthy();
+    const original = await readFile(`src/assets/images/${name}`);
+    const served = await response.body();
+    expect(createHash('sha256').update(served).digest('hex')).toBe(
+      createHash('sha256').update(original).digest('hex'),
+    );
+  }
+  await page.goto('/sign-in.html');
+  await expect(page).toHaveURL(/\/login$/);
+  await expect(page.getByRole('button', { name: 'Log in', exact: true })).toBeVisible();
+  await expect(page.locator('img.quizio-header-art')).toHaveAttribute(
+    'src',
+    '/assets/images/header-bg-2.png',
+  );
+  await page.goto('/sign-up.html');
+  await expect(page).toHaveURL(/\/register$/);
+  await expect(page.getByRole('button', { name: 'Create account', exact: true })).toBeVisible();
+  await page.goto('/leader-board.html');
+  await expect(page).toHaveURL(/\/leaderboard$/);
+  await expect(page.getByRole('heading', { name: 'Leaderboard', exact: true })).toBeVisible();
+  await page.goto('/my-wallet.html');
+  await expect(page).toHaveURL(/\/login$/);
+  if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD)
+    throw new Error('Local admin credentials are required.');
+  await json(
+    await page.request.post('/api/auth/login', {
+      data: { email: process.env.ADMIN_EMAIL, password: process.env.ADMIN_PASSWORD },
+    }),
+  );
+  await page.goto('/my-wallet.html');
+  await expect(page).toHaveURL(/\/wallet$/);
+  await expect(page.getByRole('heading', { name: 'My Wallet', exact: true })).toBeVisible();
+  await expect(page.locator('nav.quizio-bottom-nav')).toBeVisible();
+});
+
 test('admin CMS creates and resolves battles, edits offers and configures public periods', async ({
   page,
   browser,
@@ -258,7 +321,9 @@ test('admin CMS creates and resolves battles, edits offers and configures public
     page.once('dialog', (dialog) => dialog.accept());
     await card.getByRole('button', { name: 'Close battle', exact: true }).click();
     await card.getByRole('button', { name: 'Set result', exact: true }).click();
-    await page.getByRole('combobox', { name: 'Correct answer', exact: true }).selectOption(battle.options[0].id);
+    await page
+      .getByRole('combobox', { name: 'Correct answer', exact: true })
+      .selectOption(battle.options[0].id);
     await page.getByRole('button', { name: 'Confirm result & pay winners', exact: true }).click();
     await expect(page.getByRole('dialog')).toHaveCount(0);
     await expect(card.locator('.badge')).toHaveText('settled');
@@ -302,7 +367,9 @@ test('admin CMS creates and resolves battles, edits offers and configures public
     await publicPage.goto('/leaderboard');
     await expect(publicPage.locator('body')).not.toContainText('Something got in the way');
     await expect(publicPage.getByRole('button', { name: 'This month', exact: true })).toBeVisible();
-    await expect(publicPage.getByRole('heading', { name: 'Monthly leaders', exact: true })).toBeVisible();
+    await expect(
+      publicPage.getByRole('heading', { name: 'Monthly leaders', exact: true }),
+    ).toBeVisible();
     await expect(publicPage.getByRole('button', { name: 'This week', exact: true })).toHaveCount(0);
   } finally {
     await page.request.patch('/api/admin/settings', { data: original }).catch(() => {});

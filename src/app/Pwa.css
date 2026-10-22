@@ -1,0 +1,51 @@
+.q-pwa {
+  position: relative;
+  z-index: 40;
+  margin: 12px 20px;
+  border: 1px solid #ded5ff;
+  border-radius: 14px;
+  background: #f4f0ff;
+  padding: 12px;
+  color: #352069;
+  font:
+    500 12px/1.6 Poppins,
+    sans-serif;
+}
+.q-pwa p,
+.q-pwa > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+.q-pwa svg {
+  flex-shrink: 0;
+}
+.q-pwa button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 9px;
+  padding: 8px 10px;
+  background: #613bff;
+  color: white;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.q-pwa button:focus-visible {
+  outline: 3px solid #ff710f;
+  outline-offset: 3px;
+}
+body.dark .q-pwa {
+  background: #241761;
+  border-color: #554281;
+  color: #eee7ff;
+}
+@media (max-width: 360px) {
+  .q-pwa > div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

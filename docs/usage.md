@@ -1,6 +1,6 @@
-# Using Battle Arena
+# Using Quizio Battles
 
-Battle Arena is a virtual-coin prediction application. Coins have no withdrawal or cash-out flow. Manual deposits are recorded by the application and credited only after an administrator verifies a transfer outside the application. The application does not process bank payments.
+Quizio Battles develops the original Quizio mobile PWA into a virtual-coin prediction application. Coins have no withdrawal or cash-out flow. Manual deposits are recorded by the application and credited only after an administrator verifies a transfer outside the application. The application does not process bank payments.
 
 ## Players
 
@@ -11,6 +11,14 @@ Battle Arena is a virtual-coin prediction application. Coins have no withdrawal 
 5. Follow the battle in bet history. A closed battle is awaiting an administrator's result; a settled battle displays the recorded result and payout.
 
 The server checks the current balance, battle status, closing time, and selected option when accepting a bet. A page left open past the deadline does not extend that deadline. Displayed potential rewards are estimates until the final pool is known.
+
+### Install and reconnect
+
+On a supported browser, use the application's install action when it is offered, or the browser's install/Add to Home Screen menu. Installation requires the production build over HTTPS, with a localhost exception for local testing.
+
+The app can reopen its public shell while offline. Sign-in, balances, bets, deposit requests and rankings still need a connection; the app does not queue financial actions for later submission. Reconnect and refresh the relevant data before placing a bet or reviewing a deposit.
+
+When a new app version is available, finish any form you are editing before choosing the update action. Updating reloads the app after you accept it.
 
 ### Requesting coins by bank transfer
 

@@ -1,10 +1,12 @@
 {
-  "name": "Quizio",
-  "short_name": "quizio",
-  "start_url": "index.html",
+  "id": "/",
+  "name": "Quizio Battles",
+  "short_name": "Quizio",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#613BFF",
   "orientation": "portrait-primary",
   "icons": [
     {

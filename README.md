@@ -1,6 +1,6 @@
-# Battle Arena
+# Quizio Battles
 
-A mobile-first React application for community predictions with virtual coins. Includes a Node.js REST API, PostgreSQL accounting, and a custom administrator CMS. Coins cannot be withdrawn or redeemed for cash.
+A mobile-first battle application built from the existing Quizio PWA template in `src`. React screens reuse its layout, purple/orange theme, Poppins typography and original illustrations. The application includes a Node.js REST API, PostgreSQL accounting, and a custom administrator CMS. Coins cannot be withdrawn or redeemed for cash.
 
 ## Run locally
 
@@ -45,6 +45,7 @@ When explicitly seeded in development, the demo player is `demo@battle.local` / 
 - Manual bank-transfer requests with snapshotted packages and administrator approval/rejection.
 - Bet history, results and payouts; public weekly, monthly and three-month seasonal rankings.
 - Administrator CMS for battles/results, all bets and users, deposits, offers/discounts, bank instructions and leaderboard rules.
+- Installable PWA with an offline public app shell. Account data and financial actions require a live API connection.
 
 Payout is `floor(total pool × your stake / all stakes on the winning answer × answer odds × battle multiplier)`. Multipliers can create additional virtual coins. Financial operations use database transactions and locks; repeated approval/settlement never credits twice. Odds, choices, multiplier and closing time lock after the first bet.
 
@@ -68,13 +69,26 @@ npm run test:e2e
 
 For a preinstalled system browser, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium`. The browser suite creates clearly named test users/battles/deposits in the local development database; run it on disposable data, never on production.
 
+The service worker registers in production builds. See [PWA behavior and verification](docs/pwa.md) for install/offline checks against a built application.
+
+## Source layout
+
+- `src/*.html`: original Quizio page templates used to adapt the React screens. Relevant original page URLs have aliases in the application; unrelated template pages are not additional backend features.
+- `src/app`: React screens for battles, authentication, wallet, history, rankings and admin.
+- `src/assets/css/style.scss` and the Tailwind configuration: the existing Quizio styles and theme compiled into the app.
+- `src/assets/images`: original artwork, logos and PWA icons, served at `/assets/images/`.
+- `src/manifest.json` and `src/assets/js/service-worker.js`: PWA sources emitted at `/manifest.json` and `/service-worker.js` during the build.
+- `index.html`: application entry loading `src/app/main.tsx`; `client` contains the Vite configuration and generated production output.
+- `server`: REST API, database migrations and exact coin-accounting logic.
+
 ## Deploy and use
 
 - [Deployment, configuration, backups and troubleshooting](docs/deployment.md)
 - [Player and administrator guide](docs/usage.md)
 - [Payouts, coin accounting and ranking rules](docs/accounting.md)
 - [REST API reference](docs/api.md)
+- [PWA behavior and verification](docs/pwa.md)
 
 `npm run build` emits `client/dist` and `dist/server`. Production uses `npm start` to serve both the UI and API from one origin. The supplied Dockerfile and Compose app profile support a PostgreSQL-backed deployment behind HTTPS. Publication/deployment and real bank details remain operator configuration.
 
-The original Quizio HTML/CSS assets remain in `src` and the pre-existing `dist` as reference. The running application is the React client in `client`; those old template outputs are not used.
+The pre-existing root `dist` contains the old template build. The current production build is `client/dist`; it is generated from the Quizio sources above.

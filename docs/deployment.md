@@ -1,12 +1,14 @@
 # Deployment and operations
 
-The application consists of a React/Vite frontend, a Node.js/Express API, and PostgreSQL. Production serves the compiled frontend and `/api` from the same origin. The development Vite server proxies `/api` to the local API process.
+The application consists of a React/Vite frontend developed from the original Quizio PWA in `src`, a Node.js/Express API, and PostgreSQL. Production serves the compiled frontend and `/api` from the same origin. The development Vite server proxies `/api` to the local API process.
 
 Use the repository's root [README](../README.md) for a quick start. This guide describes the commands, operational requirements, and recovery procedure.
 
 ## Local development
 
 Use Node.js 24, npm, and Docker Compose. Node.js must be at least 22.12 for the frontend toolchain.
+
+For a new local Compose setup, the shortest path is `npm ci`, `npm run setup:dev -- --demo`, then `npm run dev`. The helper generates local credentials only when `.env` does not exist, waits for PostgreSQL, and applies migrations/seeding. Use the manual steps below for your own database or credentials.
 
 ```bash
 npm ci
@@ -43,6 +45,8 @@ npm test
 ```
 
 The configured database name must contain `test` and differ from `DATABASE_URL`. Each test run creates and removes an isolated schema. Never point the test variable to a database with useful data. Stop the development watcher before `npm ci` refreshes `node_modules`; restart it after installation completes.
+
+The development server does not register a service worker, so hot reloads do not use a stale cached app. Use a built application for PWA verification; see [PWA behavior and verification](pwa.md).
 
 ## Environment variables
 
@@ -132,6 +136,8 @@ If the proxy hostname exists only in the host's local resolver/hosts file, also 
 
 Route both the frontend and `/api` to the application origin. Forward the original protocol consistently when TLS terminates before Node. Configure the application's proxy-trust setting only for proxies you actually control; accepting arbitrary forwarded addresses undermines IP-based rate limits.
 
+Preserve `/manifest.json`, `/service-worker.js` and `/assets/` on that same origin. The worker and app HTML must be revalidated rather than served indefinitely from a proxy cache; versioned build assets can be cached for longer. Missing JavaScript or image files must remain HTTP 404 responses instead of receiving the SPA HTML fallback.
+
 Do not expose PostgreSQL publicly unless access is explicitly restricted. A production browser does not connect to PostgreSQL directly.
 
 ## Admin onboarding
@@ -181,5 +187,7 @@ The shell expands these variables locally; do not paste the connection-string va
 | Approval does not add coins again | Check whether the request is already approved; approval is intentionally idempotent |
 | Closed battle has no payout | An admin must select the result and settle; check whether the user selected the winning answer |
 | Leaderboard changes at an unexpected local time | Period boundaries use UTC, not the browser's timezone |
+| Installed app still shows an older version | Reconnect, wait for the update action, and accept it after finishing open forms; check that the proxy revalidates the worker and app HTML |
+| Offline app opens but account actions fail | Only the public shell/assets work offline; API operations require a connection |
 
-See [Using Battle Arena](usage.md) for player/admin workflows and [Virtual-coin accounting](accounting.md) for payout rules.
+See [Using Quizio Battles](usage.md) for player/admin workflows, [PWA behavior](pwa.md) for caching/install checks, and [Virtual-coin accounting](accounting.md) for payout rules.

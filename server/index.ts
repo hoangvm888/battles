@@ -8,8 +8,33 @@ const pool = createPool();
 const app = createApp({ pool });
 const clientDirectory = path.resolve(process.cwd(), 'client/dist');
 if (existsSync(clientDirectory)) {
-  app.use(express.static(clientDirectory, { maxAge: '1h', index: false }));
-  app.get('/{*splat}', (_req, res) => res.sendFile(path.join(clientDirectory, 'index.html')));
+  app.use(
+    express.static(clientDirectory, {
+      maxAge: '1h',
+      index: false,
+      setHeaders(res, file) {
+        if (['index.html', 'service-worker.js', 'manifest.json'].includes(path.basename(file))) {
+          res.setHeader('Cache-Control', 'no-cache');
+        } else if (
+          file.includes(path.sep + 'assets' + path.sep) &&
+          !file.includes(path.sep + 'images' + path.sep)
+        ) {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        }
+      },
+    }),
+  );
+  app.get('/{*splat}', (req, res) => {
+    if (
+      req.path.startsWith('/assets/') ||
+      (path.extname(req.path) && !req.path.endsWith('.html'))
+    ) {
+      res.status(404).type('text').send('Asset not found.');
+      return;
+    }
+    res.setHeader('Cache-Control', 'no-cache');
+    res.sendFile(path.join(clientDirectory, 'index.html'));
+  });
 }
 const port = Number(process.env.PORT) || 3001;
 const server = app.listen(

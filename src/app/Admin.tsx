@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Plus,
   Search,
@@ -1352,9 +1353,9 @@ function Modal({
       previousFocus?.focus();
     };
   }, []);
-  return (
+  return createPortal(
     <div
-      className="admin-modal-backdrop"
+      className="admin-page admin-modal-backdrop"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -1380,6 +1381,7 @@ function Modal({
         </div>
         {children}
       </section>
-    </div>
+    </div>,
+    document.body,
   );
 }

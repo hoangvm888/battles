@@ -183,4 +183,6 @@ deposit: pending → approved | rejected
 
 The closing timestamp also prevents late bets even before an administrator performs manual close. Bets and package terms are checked on the server at request time. Settlement and deposit approval serialize competing requests so a retry cannot issue another payout or coin credit.
 
-See [Virtual-coin accounting](accounting.md) for the exact payout formula and period attribution. See [Using Battle Arena](usage.md) for the CMS review procedure.
+The PWA does not cache API responses or queue writes while offline. Balances, bets, approvals and authentication always require the server.
+
+See [Virtual-coin accounting](accounting.md) for the exact payout formula and period attribution. See [Using Quizio Battles](usage.md) for the CMS review procedure.

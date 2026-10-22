@@ -56,6 +56,13 @@ export class ApiError extends Error {
   }
 }
 export async function api<T = any>(path: string, options: RequestInit = {}): Promise<T> {
+  if (!navigator.onLine) {
+    throw new ApiError(
+      'You are offline. Reconnect to load account data or submit a request.',
+      503,
+      'OFFLINE',
+    );
+  }
   const response = await fetch(path, {
     ...options,
     credentials: 'include',

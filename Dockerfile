@@ -6,6 +6,8 @@ RUN --mount=type=secret,id=build_ca \
       NODE_EXTRA_CA_CERTS=/run/secrets/build_ca npm ci --no-audit --no-fund; \
     else npm ci --no-audit --no-fund; fi
 COPY client ./client
+COPY src ./src
+COPY index.html tailwind.config.cjs ./
 COPY server ./server
 RUN npm run build
 

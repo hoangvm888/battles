@@ -1,0 +1,243 @@
+.q-wallet,
+.q-history {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  padding-bottom: 24px;
+}
+.q-finance-tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+}
+.q-refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: inherit;
+  font: inherit;
+  min-height: 32px;
+  letter-spacing: 0;
+}
+.q-wallet-balance {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 22px 18px;
+  color: white;
+  border-radius: 16px;
+  background: #ff710f;
+  margin: -7px 0 0;
+}
+.q-wallet-balance::before,
+.q-wallet-balance::after {
+  content: '';
+  position: absolute;
+  inset: 10px 8px -10px;
+  z-index: -1;
+  border-radius: 16px;
+  background: #ff710f;
+  opacity: 0.3;
+}
+.q-wallet-balance::after {
+  inset: 20px 16px -20px;
+  opacity: 0.18;
+}
+.q-wallet-bank {
+  width: 47px;
+  height: 47px;
+  flex: 0 0 47px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: white;
+  color: #292929;
+}
+.q-wallet-balance-value {
+  flex: 1;
+  min-width: 0;
+}
+.q-wallet-balance-value h2 {
+  font-size: 26px;
+  line-height: 1.3;
+  font-weight: 600;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.q-wallet-balance-value p {
+  font-size: 10px;
+  margin: 4px 0 0;
+  color: #fff5ee;
+}
+.q-wallet-add {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  border-radius: 9px;
+  padding: 11px 9px;
+  background: white;
+  color: #292929;
+  font-weight: 600;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.q-wallet-note {
+  display: flex;
+  gap: 7px;
+  justify-content: center;
+  align-items: center;
+  color: #655a73;
+  margin: 5px 0 -9px;
+  font-size: 10px;
+}
+.q-finance-panel {
+  min-width: 0;
+  padding: 22px 18px;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid rgba(20, 20, 20, 0.1);
+}
+.q-wallet-overview > div {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px dashed rgba(20, 20, 20, 0.1);
+}
+.q-wallet-overview > div:first-child { padding-top: 0; }
+.q-wallet-overview > div:last-child { padding-bottom: 0; border: 0; }
+.q-wallet-overview p { font-size: 11px; font-weight: 500; margin: 0 0 4px; }
+.q-wallet-overview strong { font-size: 23px; font-weight: 600; color: #613bff; }
+.q-finance-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #613bff;
+  background: rgba(97, 59, 255, 0.1);
+  border: 1px solid rgba(97, 59, 255, 0.12);
+}
+.q-finance-meta { margin-left: auto; font-size: 10px; color: #613bff; }
+.q-finance-section-heading { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; color: #613bff; margin-bottom: 17px; }
+.q-finance-section-heading h2 { color: #141414; margin: 0; font-size: 15px; font-weight: 600; }
+.q-finance-section-heading p { font-size: 10px; color: rgba(20, 20, 20, 0.6); margin: 4px 0 0; }
+.q-package-list { display: grid; gap: 10px; }
+.q-package { width: 100%; display: flex; gap: 11px; align-items: center; text-align: left; padding: 13px 12px; border: 1px solid rgba(20, 20, 20, 0.12); border-radius: 12px; background: white; }
+.q-package.selected { border-color: #613bff; background: #f7f4ff; }
+.q-package-icon { width: 35px; height: 35px; display: grid; place-items: center; border-radius: 50%; color: #ff710f; background: #fff1e5; flex-shrink: 0; }
+.q-package-details { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.q-package-details > strong { color: #613bff; font-size: 17px; font-weight: 600; }
+.q-package-details small { font-size: 10px; font-weight: 400; }
+.q-package-details > span { font-size: 10px; overflow-wrap: anywhere; }
+.q-package-details em { font-size: 9px; font-style: normal; color: #ff710f; }
+.q-package-price { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-size: 11px; color: #141414; }
+.q-package-price strong { font-weight: 600; }
+.q-package-price del { font-size: 9px; color: #777; }
+.q-wallet-tabs { display: flex; gap: 12px; border-bottom: 1px solid rgba(20, 20, 20, 0.1); margin-bottom: 5px; }
+.q-wallet-tabs button { flex: 1; display: inline-flex; justify-content: center; align-items: center; gap: 6px; padding: 0 0 13px; min-height: 40px; font-size: 10px; border-bottom: 2px solid transparent; color: rgba(20, 20, 20, 0.6); }
+.q-wallet-tabs button.active { border-bottom-color: #613bff; color: #613bff; font-weight: 600; }
+.q-transaction-list { list-style: none; padding: 0; margin: 0; }
+.q-transaction-list li { display: flex; align-items: center; gap: 9px; padding: 17px 0; border-bottom: 1px dashed rgba(20, 20, 20, 0.12); }
+.q-transaction-list li:last-child { border: 0; padding-bottom: 0; }
+.q-transaction-list .q-finance-icon { width: 34px; height: 34px; flex-basis: 34px; }
+.q-finance-icon.debit { color: #ff710f; background: #fff1e5; border-color: #ffdfc7; }
+.q-transaction-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.q-transaction-info strong { font-size: 10px; font-weight: 500; overflow-wrap: anywhere; }
+.q-transaction-info span, .q-transaction-info small { font-size: 9px; color: #79717f; }
+.q-transaction-info small { text-transform: capitalize; }
+.q-transaction-amount { flex: 0 0 auto; text-align: right; display: flex; flex-direction: column; gap: 4px; }
+.q-transaction-amount strong { font-size: 12px; font-weight: 600; }
+.q-transaction-amount.credit strong { color: #613bff; }
+.q-transaction-amount span { font-size: 9px; color: #79717f; }
+.q-deposit-list { display: grid; gap: 18px; padding-top: 17px; }
+.q-deposit-record { border-bottom: 1px dashed rgba(20,20,20,.12); padding-bottom: 18px; }
+.q-deposit-record:last-child { border: 0; padding-bottom: 0; }
+.q-deposit-record-top { display: flex; align-items: center; gap: 8px; }
+.q-deposit-record-top .q-finance-icon { width: 33px; height: 33px; flex-basis: 33px; }
+.q-deposit-record-top > div { flex: 1; min-width: 0; }
+.q-deposit-record-top strong { display: block; font-size: 11px; font-weight: 600; overflow-wrap: anywhere; }
+.q-deposit-record-top p { font-size: 9px; color: #746b7c; margin: 4px 0 0; }
+.q-status { display: inline-flex; align-items: center; gap: 3px; border-radius: 6px; padding: 5px 7px; font-size: 9px; background: #fff1e5; color: #d95600; flex-shrink: 0; }
+.q-status.approved, .q-status.won { background: #eee9ff; color: #613bff; }
+.q-status.rejected, .q-status.lost { background: #ffedef; color: #ae3a50; }
+.q-deposit-record dl { display: grid; gap: 6px; font-size: 9px; margin: 12px 0 0; }
+.q-deposit-record dl > div { display: flex; justify-content: space-between; gap: 10px; }
+.q-deposit-record dt { color: #79717f; }
+.q-deposit-record dd { margin: 0; text-align: right; overflow-wrap: anywhere; max-width: 65%; }
+.q-deposit-message { color: #79717f; font-size: 9px; margin: 10px 0 0; line-height: 1.8; }
+.q-sheet-backdrop { position: fixed; inset: 0; z-index: 400; background: rgba(8, 26, 61, .5); display: flex; justify-content: center; align-items: flex-end; padding-top: 20px; }
+.q-deposit-sheet { width: 100%; max-width: 430px; max-height: 94dvh; overflow-y: auto; background: white; border-radius: 24px 24px 0 0; color: #141414; position: relative; outline: none; }
+.q-sheet-decoration { width: 100%; height: 35px; object-fit: fill; margin-bottom: -15px; }
+.q-sheet-body { padding: 15px 24px 30px; }
+.q-sheet-heading { display: flex; align-items: flex-start; gap: 12px; justify-content: space-between; margin-bottom: 21px; }
+.q-sheet-heading p { color: #613bff; font-size: 9px; letter-spacing: .5px; margin: 0 0 7px; }
+.q-sheet-heading h2 { font-size: 21px; font-weight: 600; line-height: 1.4; margin: 0; }
+.q-sheet-close { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(20,20,20,.15); flex-shrink: 0; }
+.q-sheet-balance { display: flex; align-items: center; gap: 8px; background: #ff710f; color: white; border-radius: 12px; font-size: 11px; padding: 13px; margin-bottom: 23px; flex-wrap: wrap; }
+.q-sheet-balance > span { display: grid; place-items: center; padding: 6px; border-radius: 50%; background: white; color: #ff710f; }
+.q-sheet-balance strong { font-weight: 600; }
+.q-deposit-sheet .field { font-size: 11px; }
+.q-deposit-sheet input, .q-deposit-sheet select, .q-deposit-sheet textarea { min-width: 0; width: 100%; font-size: 11px; padding: 13px; border-radius: 10px; border: 1px solid rgba(20,20,20,.15); background: white; }
+.q-deposit-bank { background: #f7f4ff; padding: 15px; border-radius: 12px; }
+.q-deposit-bank h3 { font-size: 12px; font-weight: 600; margin: 0 0 14px; line-height: 1.8; }
+.q-deposit-bank dl { margin: 0; display: grid; gap: 11px; }
+.q-deposit-bank dt { font-size: 9px; color: #79717f; margin-bottom: 3px; }
+.q-deposit-bank dd { font-size: 11px; margin: 0; overflow-wrap: anywhere; }
+.q-bank-number { display: flex; align-items: center; gap: 9px; }
+.q-bank-instructions { white-space: pre-wrap; }
+.q-copy { color: #613bff; padding: 5px; }
+.q-deposit-confirm { display: flex; align-items: flex-start; gap: 9px; font-size: 10px; line-height: 1.8; }
+.q-deposit-confirm input { width: 16px; height: 16px; flex: 0 0 16px; margin-top: 3px; padding: 0; accent-color: #613bff; }
+.q-deposit-submit { width: 100%; }
+.q-deposit-sheet small.muted { font-size: 9px; line-height: 1.8; }
+.q-history-intro { display: flex; align-items: center; gap: 13px; color: white; margin-bottom: 2px; }
+.q-history-intro > span { width: 57px; height: 57px; background: white; border-radius: 50%; flex: 0 0 57px; display: grid; place-items: center; }
+.q-history-intro img { width: 34px; height: 34px; }
+.q-history-intro h2 { font-size: 17px; font-weight: 600; margin: 0; }
+.q-history-intro p { font-size: 10px; color: #e2dcff; margin: 6px 0 0; }
+.q-history-filter-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 18px; }
+.q-history-filter-header > span { font-size: 10px; color: #79717f; }
+.q-history-tabs { display: flex; gap: 6px; overflow-x: auto; }
+.q-history-tabs button { font-size: 10px; padding: 8px 9px; min-height: 38px; border-radius: 8px; white-space: nowrap; background: #f5f2ff; color: #613bff; }
+.q-history-tabs button.active { color: white; background: #613bff; }
+.q-bet-list { display: grid; gap: 17px; }
+.q-bet-record { border: 1px solid rgba(20,20,20,.12); border-radius: 13px; overflow: hidden; padding: 17px; }
+.q-bet-top { display: flex; align-items: flex-start; gap: 9px; }
+.q-bet-day { flex: 0 0 33px; width: 33px; text-align: center; color: white; background: #613bff; padding: 4px 2px; border-radius: 7px; }
+.q-bet-day span { font-size: 8px; display: block; }
+.q-bet-day strong { font-size: 13px; font-weight: 600; }
+.q-bet-title { min-width: 0; flex: 1; }
+.q-bet-title h3 { font-size: 11px; line-height: 1.7; font-weight: 600; margin: 0 0 4px; }
+.q-bet-title p { font-size: 9px; color: #79717f; margin: 0; overflow-wrap: anywhere; }
+.q-bet-choice { display: flex; align-items: center; gap: 10px; padding: 15px 0; }
+.q-bet-choice > span { display: grid; place-items: center; width: 30px; height: 30px; color: #ff710f; background: #fff1e5; border-radius: 50%; }
+.q-bet-choice img { width: 23px; height: 23px; object-fit: contain; }
+.q-bet-choice p { font-size: 9px; color: #79717f; margin: 0 0 3px; }
+.q-bet-choice strong { font-size: 11px; font-weight: 500; }
+.q-bet-outcome { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 9px; border-top: 1px dashed rgba(20,20,20,.13); border-bottom: 1px dashed rgba(20,20,20,.13); padding: 13px 0; }
+.q-bet-outcome span { display: block; font-size: 8px; color: #79717f; margin-bottom: 6px; }
+.q-bet-outcome strong { font-size: 11px; font-weight: 600; }
+.q-bet-outcome .credit { color: #613bff; }
+.q-bet-outcome .loss { color: #bd4b43; }
+.q-bet-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; }
+.q-bet-bottom small { display: flex; align-items: center; gap: 4px; font-size: 8px; color: #79717f; }
+.q-bet-bottom a { display: inline-flex; align-items: center; gap: 3px; color: #613bff; font-size: 9px; white-space: nowrap; }
+.q-history-footer { text-align: center; font-size: 10px; color: #79717f; line-height: 1.9; }
+@media (max-width: 360px) {
+  .q-wallet-balance { gap: 8px; padding: 18px 12px; }
+  .q-wallet-bank { width: 36px; height: 36px; flex-basis: 36px; }
+  .q-wallet-balance-value h2 { font-size: 23px; }
+  .q-wallet-add { font-size: 9px; padding: 9px 7px; }
+  .q-finance-panel { padding: 20px 14px; }
+  .q-history-filter-header { align-items: flex-start; flex-direction: column; }
+}

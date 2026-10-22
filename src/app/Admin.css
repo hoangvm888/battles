@@ -20,7 +20,7 @@
   background: white;
   padding: 10px 14px;
   border-radius: 999px;
-  color: #697183;
+  color: #81778b;
   font-size: 12px;
   font-weight: 700;
 }
@@ -29,7 +29,7 @@
   gap: 6px;
   overflow: auto;
   padding: 7px;
-  background: #eaedf2;
+  background: #f0eaff;
   border-radius: 14px;
   margin: 28px 0 32px;
 }
@@ -44,14 +44,14 @@
   padding: 12px 18px;
   white-space: nowrap;
   cursor: pointer;
-  color: #697183;
+  color: #81778b;
   font: inherit;
   font-weight: 600;
   font-size: 13px;
 }
 .admin-nav-item.active {
   background: white;
-  color: #182a43;
+  color: #613bff;
   box-shadow: 0 2px 6px #152b4810;
 }
 .admin-section-head {
@@ -103,7 +103,7 @@
   border: 1px solid #e0e4eb;
   border-radius: 10px;
   padding: 12px;
-  color: #435069;
+  color: #5b4f68;
   font: inherit;
   font-size: 13px;
 }
@@ -158,7 +158,7 @@
   padding: 12px 14px;
   border-radius: 8px;
   font-size: 13px;
-  color: #697183;
+  color: #81778b;
 }
 .admin-battle-options > div span {
   display: flex;
@@ -361,7 +361,7 @@
   gap: 8px;
   font-size: 12px;
   font-weight: 600;
-  color: #526078;
+  color: #5c4a78;
   min-width: 0;
 }
 .admin-page .field input,
@@ -376,7 +376,7 @@
   font: inherit;
   font-size: 13px;
   font-weight: 400;
-  color: #293c57;
+  color: #332545;
   padding: 12px 13px;
   outline: none;
 }
@@ -386,8 +386,8 @@
 .admin-page .field input:focus,
 .admin-page .field textarea:focus,
 .admin-page .field select:focus {
-  border-color: #8479d6;
-  box-shadow: 0 0 0 3px #8479d612;
+  border-color: #613bff;
+  box-shadow: 0 0 0 3px #613bff12;
 }
 .admin-page .field input:disabled {
   background: #f5f6f8;
@@ -411,7 +411,7 @@
 .admin-periods legend {
   font-size: 12px;
   font-weight: 650;
-  color: #526078;
+  color: #5c4a78;
   margin-bottom: 15px;
 }
 .admin-periods label {
@@ -422,7 +422,7 @@
   cursor: pointer;
 }
 .admin-periods input {
-  accent-color: #6e61b6;
+  accent-color: #613bff;
   width: 17px;
   height: 17px;
   margin: 0;
@@ -431,7 +431,7 @@
   display: block;
   font-size: 13px;
   font-weight: 650;
-  color: #384a63;
+  color: #332545;
 }
 .admin-periods small {
   display: block;
@@ -445,7 +445,7 @@
   border-radius: 9px;
   font-size: 12px;
   line-height: 1.7;
-  color: #758197;
+  color: #79628e;
   margin: 5px 0 15px;
 }
 .admin-pagination {
@@ -480,7 +480,7 @@
   max-height: calc(100dvh - 40px);
   overflow: auto;
   padding: 28px;
-  color: #263852;
+  color: #332545;
 }
 .admin-modal-heading {
   display: flex;
@@ -557,7 +557,7 @@
   font-size: 13px;
 }
 .admin-checkbox input {
-  accent-color: #6e61b6;
+  accent-color: #613bff;
   width: 17px;
   height: 17px;
 }
