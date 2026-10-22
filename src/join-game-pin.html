@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="./assets/images/logo.png"
+      type="image/x-icon"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="manifest" href="./manifest.json" />
+    <title>Join Game - Quizio PWA HTML Template</title>
+  </head>
+  <body class="">
+    <div
+      class="container bg-p2 min-h-dvh relative overflow-hidden py-8 dark:text-white z-10"
+    >
+      <!-- Page Title Start -->
+      <div class="relative z-30 px-6">
+        <div class="flex justify-between items-center gap-4">
+          <div class="flex justify-start items-center gap-4">
+            <a
+              href="./home.html"
+              class="bg-white size-8 rounded-full flex justify-center items-center text-xl dark:bg-color10"
+            >
+              <i class="ph ph-caret-left"></i>
+            </a>
+            <h2 class="text-2xl font-semibold text-white">Join Game</h2>
+          </div>
+          <a
+            href=""
+            class="border border-color24 p-2 rounded-full flex justify-center items-center bg-color24 relative"
+          >
+            <i class="ph ph-barcode text-white"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="flex justify-center items-center flex-col pt-16">
+        <h2 class="text-2xl font-semibold text-white">Enter PIN</h2>
+        <p class="text-xs text-white pt-3">Please Enter Your PIN TO Continue</p>
+        <form action="" class="relative z-10 otp-form">
+          <div
+            class="flex justify-between items-center gap-3 px-10 max-w-[380px] mx-auto py-6"
+          >
+            <input type="text" class="item otp-form-item" maxlength="1" />
+            <input type="text" class="item otp-form-item" maxlength="1" />
+            <input type="text" class="item otp-form-item" maxlength="1" />
+            <input type="text" class="item otp-form-item" maxlength="1" />
+          </div>
+
+          <a
+            class="bg-white rounded-full py-3 text-p2 text-sm font-semibold text-center block mt-12 dark:bg-p1 dark:text-white"
+            >Join Now</a
+          >
+        </form>
+      </div>
+    </div>
+
+    <!-- ==== js dependencies start ==== -->
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/plugins/opt-form.js"></script>
+  </body>
+</html>

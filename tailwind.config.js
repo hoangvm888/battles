@@ -1,0 +1,38 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: "class",
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {
+      colors: {
+        p1: "#FF710F",
+        p2: "#613BFF",
+        p3: "#5EBA67",
+        black: "#081A3D",
+        n600: "rgba(20,20,20,0.60)",
+        color1: "#141414",
+        bgColor1: "#FDF3EC",
+        color4: "rgba(94, 186, 103, 0.08)",
+        color5: "rgba(20, 20, 20, 0.80)",
+        bgColor5: "rgba(255, 255, 255, 0.80)",
+        color7: "rgba(255, 255, 255, 0.16)",
+        color8: "#437",
+        color9: "#292929",
+        color10: "#1D124D",
+        color11: "#241761",
+        color12: "rgba(255, 113, 15, 0.40)",
+        color13: "rgba(97, 59, 255, 0.60)",
+        color14: "rgba(97, 59, 255, 0.10)",
+        bgColor14: "rgba(236, 137, 68, 0.10)",
+        color16: "rgba(97, 59, 255, 0.20)",
+        bgColor16: "rgba(236, 137, 68, 0.40)",
+        color18: "rgba(255, 255, 255, 0.40)",
+        bgColor18: "rgba(20,20,20,0.40)",
+        bgColor20: "rgba(255, 255, 255, 0.42)",
+        color21: "rgba(20, 20, 20,0.16)",
+        color24: "rgba(255, 255, 255, 0.24)",
+      },
+    },
+  },
+  plugins: [],
+};
