@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: battles
+      POSTGRES_DB: battles
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - battles_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U battles -d battles"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+  app:
+    profiles: ["app"]
+    build: .
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      APP_ORIGIN: ${APP_ORIGIN:?Set APP_ORIGIN to the external HTTPS origin}
+      DATABASE_URL: postgresql://battles:${POSTGRES_PASSWORD}@db:5432/battles
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+      DEMO_MODE: "false"
+    ports:
+      - "127.0.0.1:3001:3001"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  battles_postgres:
